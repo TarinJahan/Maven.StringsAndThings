@@ -1,6 +1,9 @@
 package io.zipcoder;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author tariq
  */
@@ -16,6 +19,19 @@ public class StringsAndThings {
      */
     public Integer countYZ(String input){
         return input.indexOf(input.charAt(2));
+
+        /*Integer count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == 'y' || input.charAt(i) == 'z') {
+                if (i == input.length() - 1) {
+                    count++;
+                } else if (!Character.isLetter(input.charAt(i + 1))) {
+                    count++;
+                }
+            }
+
+        }
+        return count;*/
     }
 
     /**
@@ -31,6 +47,12 @@ public class StringsAndThings {
         String s = base + remove;
         s = (s.replace(remove, ""));
         return s;
+
+       /* String rem = base.replace(remove, "");
+        System.out.println(rem);
+
+        return rem;*/
+
     }
 
     /**
@@ -42,8 +64,22 @@ public class StringsAndThings {
      *           containsEqualNumberOfIsAndNot("noisxxnotyynotxisi") // Should return true
      */
     public Boolean containsEqualNumberOfIsAndNot(String input){
+        Pattern isP = Pattern.compile("is");
+        Pattern notP = Pattern.compile("not");
+        Matcher isM = isP.matcher(input);
+        Matcher notM = notP.matcher(input);
 
-        return null;
+        int match = 0;
+        int notMatch = 0;
+
+        while (isM.find()) {
+            match++;
+        }
+        while (notM.find()) {
+            notMatch++;
+        }
+        return (match == notMatch);
+
     }
 
     /**
@@ -54,7 +90,17 @@ public class StringsAndThings {
      *           gHappy("xxggyygxx") // Should return  false
      */
     public Boolean gIsHappy(String input){
-        return null;
+        String isHappy = "";
+
+        for (int i = 0; i < input.length(); i++ ) {
+            if (input.charAt(i) == 'g') {
+                if (input.charAt(i - 1) == 'g' || input.charAt(i + 1) == 'g') {
+//                    isHappy = "happy";
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 
@@ -66,6 +112,16 @@ public class StringsAndThings {
      *            countTriple("a") // Should return 0
      */
     public Integer countTriple(String input){
-        return null;
+        int count = 0;
+
+        for (int i = 0; i < input.length()-2; i++)
+        {
+            char c = input.charAt(i);
+            if (c == input.charAt(i+1) && c == input.charAt(i+2))
+                count++;
+        }
+        return count;
     }
+    
 }
+
